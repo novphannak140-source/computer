@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-("use client");
+"use client";
+import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -69,11 +69,7 @@ const Mouse = ({ data }) => {
         {slides.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="relative rounded-2xl overflow-hidden shadow-md">
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full   "
-              />
+              <img src={item.img} alt={item.title} className="w-full   " />
               {/* <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white p-4 sm:p-6">
                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">
                   {item.title}
