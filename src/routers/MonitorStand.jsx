@@ -5,59 +5,57 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos";
+import { useEffect, useState } from "react";
+
 import img1 from "../assets/Phontos-Slider/Slider-monitor-stand/Slider-monitor-stand-1.jpg";
 import img2 from "../assets/Phontos-Slider/Slider-monitor-stand/Slider-monitor-stand-2.jpg";
 import img3 from "../assets/Phontos-Slider/Slider-monitor-stand/Slider-monitor-stand-3.jpg";
 import img4 from "../assets/Phontos-Slider/Slider-monitor-stand/Slider-monitor-stand-4.jpg";
 import img5 from "../assets/Phontos-Slider/Slider-monitor-stand/Slider-monitor-stand-5.jpg";
 import img6 from "../assets/Phontos-Slider/Slider-monitor-stand/Slider-monitor-stand-6.jpg";
-import { Link } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos";
-import { useEffect } from "react";
 
 const MonitorStand = ({ data }) => {
+  const [loading, setLoading] = useState(true);
+
+  const slides = [
+    { id: 1, img: img1 },
+    { id: 2, img: img2 },
+    { id: 3, img: img3 },
+    { id: 4, img: img4 },
+    { id: 5, img: img5 },
+    { id: 6, img: img6 },
+  ];
+
   useEffect(() => {
     AOS.init({});
+    const timer = setTimeout(() => setLoading(false), 1500); // simulate loading
+    return () => clearTimeout(timer);
   }, []);
-  const slides = [
-    {
-      id: 1,
-      img: img1,
-      title: "Gaming Headset",
-      desc: "Surround sound for ultimate immersion.",
-    },
-    {
-      id: 2,
-      img: img2,
-      title: "Gaming Headset",
-      desc: "Surround sound for ultimate immersion.",
-    },
-    {
-      id: 3,
-      img: img3,
-      title: "Gaming Headset",
-      desc: "Surround sound for ultimate immersion.",
-    },
-    {
-      id: 4,
-      img: img4,
-      title: "Pc in black ",
-      desc: "Surround sound for ultimate immersion.",
-    },
-    {
-      id: 5,
-      img: img5,
-      title: "Pc in black ",
-      desc: "Surround sound for ultimate immersion.",
-    },
-    {
-      id: 6,
-      img: img6,
-      title: "Pc in black ",
-      desc: "Surround sound for ultimate immersion.",
-    },
-  ];
+
+  if (loading) {
+    return (
+      <div className="w-full p-5 space-y-6 animate-pulse">
+        {/* Fake slider */}
+        <div className="w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] bg-gray-800 rounded-2xl"></div>
+
+        {/* Fake cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {Array(4).fill().map((_, i) => (
+            <div key={i} className="bg-gray-800 rounded-2xl h-56 flex flex-col overflow-hidden">
+              <div className="w-full h-32 bg-gray-700"></div>
+              <div className="p-3">
+                <div className="h-4 bg-gray-600 rounded mb-2"></div>
+                <div className="h-3 bg-gray-600 rounded w-1/2 mb-1"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full bg-[radial-gradient(circle,black,#1A120B,black,#1A120B,black,#3C2A21,black,black)] mx-auto py-6 px-5">
@@ -69,42 +67,35 @@ const MonitorStand = ({ data }) => {
         modules={[Pagination, Navigation, Autoplay]}
         className="rounded-2xl shadow-lg"
         breakpoints={{
-          320: { slidesPerView: 1 }, // mobile
-          640: { slidesPerView: 2 }, // tablet
-          1024: { slidesPerView: 3 }, // desktop
-          1280: { slidesPerView: 3 }, // large desktop
+          320: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+          1280: { slidesPerView: 3 },
         }}
       >
         {slides.map((item) => (
           <SwiperSlide key={item.id}>
             <div className="relative rounded-2xl overflow-hidden shadow-md">
-              <img src={item.img} alt={item.title} className="w-full" />
-              {/* <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white p-4 sm:p-6">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-1">
-                  {item.title}
-                </h2>
-                <p className="text-sm sm:text-base md:text-lg text-center">
-                  {item.desc}
-                </p>
-              </div> */}
+              <img src={item.img} alt={`Slide ${item.id}`} className="w-full" />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* Card monitorStand */}
-      <div className="w-full h-auto  py-5">
+
+      {/* Cards */}
+      <div className="w-full h-auto py-5">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {data.map((item) => (
             <Link
               data-aos="zoom-in"
               key={item.id}
               to={`/cardmonitorstand/${item.id}`}
-              className="bg-white rounded-2xl  flex flex-col justify-center overflow-hidden shadow-lg hover:scale-99 hover:shadow-gray-800 transition-all duration-300"
+              className="bg-white rounded-2xl flex flex-col justify-center overflow-hidden shadow-lg hover:scale-99 hover:shadow-gray-800 transition-all duration-300"
             >
-              <img src={item.image} alt={item.brand} className=" bg-gray-900" />
-              <div className="p-3 flex flex-col py-6 text-center font-bold font-sans text-[10px] md:text-lg lg:text-md ">
+              <img src={item.image} alt={item.brand} className="bg-gray-900" />
+              <div className="p-3 flex flex-col py-6 text-center font-bold font-sans text-[10px] md:text-lg lg:text-md">
                 <h2 className="font-bold text-red-500">{item.Price}</h2>
-                <p className="">{item.brand}</p>
+                <p>{item.brand}</p>
               </div>
             </Link>
           ))}
@@ -113,4 +104,5 @@ const MonitorStand = ({ data }) => {
     </div>
   );
 };
+
 export default MonitorStand;

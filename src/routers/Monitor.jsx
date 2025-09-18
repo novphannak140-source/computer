@@ -12,13 +12,49 @@ import img3 from "../assets/Phontos-Slider/slider monitor/silder-3.jpg";
 import img4 from "../assets/Phontos-Slider/slider monitor/silder-4.jpg";
 import AOS from "aos";
 import "aos/dist/aos";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Monitor = ({ data }) => {
+  const [loading, setLoading] = useState(true);
+
   const slides = [img1, img2, img3, img4];
+
   useEffect(() => {
     AOS.init({});
+    const timer = setTimeout(() => setLoading(false), 1500); // simulate YouTube-style loading
+    return () => clearTimeout(timer);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="w-full p-5 space-y-6 animate-pulse">
+        {/* Fake slider */}
+        <div className="w-full h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] bg-gray-800 rounded-2xl"></div>
+
+        {/* Fake logo */}
+        <div className="w-full h-28 bg-gray-700 rounded-2xl"></div>
+
+        {/* Fake monitor cards */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {Array(4)
+            .fill()
+            .map((_, i) => (
+              <div
+                key={i}
+                className="bg-gray-800 rounded-2xl h-56 flex flex-col overflow-hidden"
+              >
+                <div className="w-full h-32 bg-gray-700"></div>
+                <div className="p-3">
+                  <div className="h-4 bg-gray-600 rounded mb-2"></div>
+                  <div className="h-3 bg-gray-600 rounded w-1/2 mb-1"></div>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-auto bg-[radial-gradient(circle,black,#1A120B,black,#1A120B,black,#3C2A21,black,black)]">
       {/* Slider */}
@@ -69,14 +105,14 @@ const Monitor = ({ data }) => {
               data-aos="zoom-in"
               key={item.id}
               to={`/monitoruser/${item.id}`}
-              className="bg-white rounded-2xl  flex   transition-all duration-800  flex-col justify-center  overflow-hidden shadow-lg hover:scale-99 object-cover hover:shadow-gray-700 "
+              className="bg-white rounded-2xl flex flex-col justify-center overflow-hidden shadow-lg hover:scale-99 hover:shadow-gray-700 transition-all duration-300"
             >
               <img
                 src={item.image}
                 alt={item.brand}
-                className=" bg-gray-900 flex justify-center   "
+                className="bg-gray-900 flex justify-center"
               />
-              <div className="p-3 text-center font-bold font-sans  text-[15px] md:text-lg lg:text-md ">
+              <div className="p-3 text-center font-bold font-sans text-[15px] md:text-lg lg:text-md">
                 <h2 className="font-bold">{item.brand}</h2>
                 <p className="text-red-500">{item.Price}</p>
               </div>
