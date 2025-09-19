@@ -35,7 +35,7 @@ const NavlocalContect = () => {
                   <div className=" flex justify-center items-center pr-3 text-[14px]">
                     <ion-icon name="call-outline"></ion-icon>
                   </div>
-                  <h1 className="">(+885) 15 203 6836</h1>
+                  <h1 className="">(+885) 15 206 236</h1>
                 </div>
                 <div className="flex md:py-1 lg:py-1 py-2 ">
                   <div className="flex justify-center items-center  pr-3 text-[15px]">
