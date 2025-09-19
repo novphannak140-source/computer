@@ -78,12 +78,12 @@ const Navbar = () => {
           </div>
           <div className="col-span-1 flex justify-center items-center ">
             <h1 className="text-[6px] md:text-[15px] lg:text-[15px]">
-              Contect : Phannak899@gamil.com
+              Contect : Phannak899@gmail.com
             </h1>
           </div>
           <div className="col-span-1 flex justify-center items-center ">
             <h1 className="text-[6px] md:text-[15px] lg:text-[15px]">
-              Facebook page : Asus Computers
+              Facebook page : PHANNAK
             </h1>
           </div>
         </div>
