@@ -359,10 +359,10 @@ const Navbar = () => {
             {/* moblie phone */}
 
             <ul
-              className={` ${inOpen ? "right-0" : "right-[100%]"}
+              className={` ${inOpen ? "right-0 " : "right-[100%] "}
             block lg:hidden absolute top-21 bg-[radial-gradient(circle,black,#1A120B)]  w-full h-auto transition-all duration-500 z-50`}
             >
-              <div className="flex flex-col ">
+              <div className="flex flex-col  ">
                 {NavLink.map((items) => (
                   <li
                     key={items.id}
@@ -408,7 +408,7 @@ const Navbar = () => {
                   )}
                 </li>
                 {/* dropdown Accessories */}
-                <li className="relative text-[19px] py-6 pl-6 shadow-md ">
+                <li className="relative text-[19px] py-6 pl-6 shadow-md  ">
                   {/* Main Button */}
                   <button
                     onClick={() => setUp(!inUp)} // ✅ use setDown here
@@ -421,7 +421,7 @@ const Navbar = () => {
                   {/* Dropdown */}
                   {inUp && (
                     <div
-                      className="mt-3  rounded-md w-100 z-50"
+                      className="mt-3  rounded-md w-100 z-50 "
                       onClick={() => setUp(false)}
                     >
                       {drobdow.map((item) => (
